@@ -3,12 +3,12 @@ import {pool} from '../db.js'
 export const obtenerpersonajes = async (_req,res) => {
     let seres = [];
     try {
-        const [resultSeres] = await pool.query('SELECT * FROM marveldb.seres;');
-        const [resultGrupos] = await pool.query('SELECT * FROM marveldb.grupos;');
-        const [resultCondiciones] = await pool.query('SELECT * FROM marveldb.condiciones;');
-        const [resultVehiculos] = await pool.query('SELECT * FROM marveldb.vehiculos;');
-        const [resultSerPoderes] = await pool.query('SELECT * FROM marveldb.ser_con_poderes;')
-        const [resultPoderes] = await pool.query('SELECT * FROM marveldb.poderes;')
+        const [resultSeres] = await pool.query('SELECT * FROM seres;');
+        const [resultGrupos] = await pool.query('SELECT * FROM grupos;');
+        const [resultCondiciones] = await pool.query('SELECT * FROM condiciones;');
+        const [resultVehiculos] = await pool.query('SELECT * FROM vehiculos;');
+        const [resultSerPoderes] = await pool.query('SELECT * FROM ser_con_poderes;')
+        const [resultPoderes] = await pool.query('SELECT * FROM poderes;')
 
         if(resultSeres.length > 0){
             seres = resultSeres.map(ser => {
