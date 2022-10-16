@@ -2,7 +2,7 @@ import {pool} from '../db.js'
 
 export const obtenerPoderes = async (_req,res) => {
     try {
-        const [result] = await pool.query('SELECT * FROM marveldb.poderes;')
+        const [result] = await pool.query('SELECT * FROM poderes;')
         res.json(result);
     } catch (error) {
         console.log(error);
