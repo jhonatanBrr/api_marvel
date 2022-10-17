@@ -39,7 +39,7 @@ export const obtenerpersonajes = async (_req,res) => {
         }
         res.json(seres);
     } catch (error) {
-        res.status(500).send('Error del servidor')
+        res.status(500).send({messaje:'Error del servidor'})
         console.log(error);
     }
 }
@@ -55,10 +55,33 @@ export const crearPersonaje = async (_req,res) => {
         }
 
         res.send({
-            id: rows.insertId
+            id: rows.insertId,
+            nombre,
+            lugar_operacion,
+            grupo_id,
+            vehiculo_id, 
+            imagen,
+            condicion_id,
+            poderes
         });
     } catch (error) {
         console.log(error);
-        res.status(500).send('Error del servidor')
+        res.status(500).send({messaje:'Error del servidor'})
+    }
+}
+
+export const editarPersonaje = async (req,res) => {
+    try {
+        const {id} = req.params
+        const {nombre,lugar_operacion} = req.body;
+        const [result] = await pool.query('UPDATE seres SET nombre = ?,lugar_operacion = ? WHERE id = ?',[nombre,lugar_operacion,id])
+        if (result.affectedRows === 0) return res.status(404).json({
+            messaje: "Personaje no encontrado"
+        })
+        const [rows] = await pool.query('SELECT * FROM seres WHERE id = ?',[id])
+        res.json(rows[0])
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({messaje:'Error del servidor'})
     }
 }

@@ -6,6 +6,6 @@ export const obtenerCondiciones = async (_req,res) => {
         res.json(result);
     } catch (error) {
         console.log(error);
-        res.status(500).send('Error del servidor')
+        res.status(500).send({messaje:'Error del servidor'})
     }
 }
